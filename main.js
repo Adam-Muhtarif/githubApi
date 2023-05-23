@@ -7,7 +7,7 @@ let userName = document.querySelector(".search-bar input"),
   avatar = document.querySelector(".avatar"),
   profile = document.getElementById("profile");
 
-btn.addEventListener("click", () => {
+btn.addEventListener("click", (event) => {
   if (userName.value == "") {
     reposContainer.innerHTML = "enter github username";
   } else {
