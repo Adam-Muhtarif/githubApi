@@ -4,11 +4,12 @@ let userName = document.querySelector(".search-bar input"),
   user = document.querySelector(".user-name"),
   fullName = document.querySelector(".fullName"),
   bio = document.querySelector(".bio"),
-  avatar = document.querySelector(".avatar");
+  avatar = document.querySelector(".avatar"),
+  profile = document.getElementById("profile");
 
 btn.addEventListener("click", () => {
   if (userName.value == "") {
-    reposContainer.innerHTML = "Please enter a username";
+    reposContainer.innerHTML = "enter github username";
   } else {
     reposContainer.innerHTML = "";
     getData(userName.value.trim());
@@ -17,14 +18,18 @@ btn.addEventListener("click", () => {
 
 async function getData(userName) {
   try {
-    let response = fetch(`https://api.github.com/users/${userName}`),
-      data = (await response).json(),
-      userData = await data;
-    getRepos(userData["repos_url"]);
-    fullName.innerHTML = userData["name"];
-    user.innerHTML = userName;
-    bio.innerHTML = userData["bio"];
-    avatar.setAttribute("src",`${userData["avatar_url"]}`);
+    let response = await fetch(`https://api.github.com/users/${userName}`),
+      userData = await response.json();
+
+    if (response.ok == true) {
+      profile.style.display = "block";
+      fullName.innerHTML = userData["name"];
+      user.innerHTML = userName;
+      bio.innerHTML = userData["bio"];
+      avatar.setAttribute("src", `${userData["avatar_url"]}`);
+
+      getRepos(userData["repos_url"]);
+    }
   } catch (reason) {
     console.log(reason);
   }
@@ -32,9 +37,8 @@ async function getData(userName) {
 
 async function getRepos(link) {
   try {
-    let response = fetch(link),
-      data = (await response).json(),
-      repos = await data;
+    let response = await fetch(link),
+      repos = await response.json();
     displayRepos(repos);
   } catch (reason) {
     console.log(reason);

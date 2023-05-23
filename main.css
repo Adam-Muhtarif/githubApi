@@ -67,6 +67,7 @@ body {
   align-self: center;
 }
 #profile {
+  display: none;
   background-color: white;
   height: 250px;
   width: 300px;
