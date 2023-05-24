@@ -114,18 +114,17 @@ body {
   height: fit-content;
   margin-top: 45px;
 }
+#profile .text h3 {
+  font-size: 22px !important;
+}
 #profile .text span {
-  font-size: 12px !important;
-  font-weight: bold;
-  position: relative;
+  font-size: 18px !important;
 }
 #profile .text span.bio {
-  font-size: 14px !important;
   letter-spacing: 2px;
   display: block;
   margin-top: 10px;
-  color: #999;
-  padding: 0 10px;
+  color: #222;
 }
 @media (max-width: 767px) {
   * {
